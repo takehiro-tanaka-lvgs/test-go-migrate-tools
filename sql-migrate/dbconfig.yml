@@ -1,0 +1,5 @@
+development:
+  dialect: postgres
+  datasource: host=sql-migrate-db dbname=center user=postgres password=postgres sslmode=disable
+  dir: migrations
+  table: migrations

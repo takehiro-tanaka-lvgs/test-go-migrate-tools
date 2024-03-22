@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["task", "build"]
+    volumes:
+      - .:/go/src/github.com/takehiro-tanaka-lvgs/goose-sample/
+    depends_on:
+      - goose-db
+  goose-db:
+    container_name: goose-db
+    image: postgres:16
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: center
+      TZ: Asia/Tokyo
+
+volumes:
+  postgres_volume:
